@@ -4,14 +4,15 @@ on:
   workflow_dispatch:
 
 env:
-  DEPLOY_ENV: production    # single source of truth
+  DEPLOY_ENV: production    # single source of truth (works only for steps)
 
 jobs:
   deploy-to-prod:
     runs-on: ubuntu-latest
 
+    # Must be a literal string — cannot reference workflow-level env vars
     environment:
-      name: ${{ env.DEPLOY_ENV }}   # bind job to "production"
+      name: production
       url: https://example.com
 
     steps:
